@@ -75,11 +75,11 @@ class KNearestNeighbor:
                 # not use a loop over dimension, nor use np.linalg.norm().          #
                 #####################################################################
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-                dists
+                dists[i, j] = X[j][i] - self.X_train[i][j]
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
-    def compute_distances_one_loop(self, X):
+    # def compute_distances_one_loop(self, X):
         """
         Compute the distance between each test point in X and each training point
         in self.X_train using a single loop over the test data.
@@ -89,7 +89,7 @@ class KNearestNeighbor:
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
         dists = np.zeros((num_test, num_train))
-        for i in range(num_test):
+        # for i in range(num_test):
             #######################################################################
             # TODO:                                                               #
             # Compute the l2 distance between the ith test point and all training #
@@ -101,7 +101,7 @@ class KNearestNeighbor:
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
-    def compute_distances_no_loops(self, X):
+    # def compute_distances_no_loops(self, X):
         """
         Compute the distance between each test point in X and each training point
         in self.X_train using no explicit loops.
@@ -129,7 +129,7 @@ class KNearestNeighbor:
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
-    def predict_labels(self, dists, k=1):
+    # def predict_labels(self, dists, k=1):
         """
         Given a matrix of distances between test points and training points,
         predict a label for each test point.
@@ -144,7 +144,7 @@ class KNearestNeighbor:
         """
         num_test = dists.shape[0]
         y_pred = np.zeros(num_test)
-        for i in range(num_test):
+        # for i in range(num_test):
             # A list of length k storing the labels of the k nearest neighbors to
             # the ith test point.
             #########################################################################
