@@ -102,7 +102,8 @@ class KNearestNeighbor:
             # Do not use np.linalg.norm().                                        #
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-            dists[i, :] = np.sqrt(np.sum((X[i] - self.X_train)**2, axis=1))
+            dists[i, :] = np.sqrt(np.sum((X[i] - self.X_train)**2, axis=1)) # используется векторизация https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F_(%D0%BF%D0%B0%D1%80%D0%B0%D0%BB%D0%BB%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5_%D0%B2%D1%8B%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F)
+            # что означает параллельные вычисления с каждым вектором в тестовом наборе данных и тренировочным
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -143,8 +144,8 @@ class KNearestNeighbor:
             # A list of length k storing the labels of the k nearest neighbors to
             # the ith test point.
             closest_y = []
-            closest_y = self.y_train[np.argsort(dists[i])[:k]]
+            closest_y = self.y_train[np.argsort(dists[i])[:k]] # отсортированный массив  расстояний и срез по наименьшему argsort is ascending sort
             # y_pred[i] = Counter(closest_y).most_common()
-            y_pred[i] = np.argmax(np.bincount(closest_y))
+            y_pred[i] = np.argmax(np.bincount(closest_y)) # np.bincount для подсчёта частоты целых положительных чисел, np.argmax для поиска максимального встречающегося числа
 
         return y_pred
